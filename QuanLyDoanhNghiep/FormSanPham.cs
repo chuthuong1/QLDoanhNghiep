@@ -218,5 +218,10 @@ namespace QuanLyDoanhNghiep
         {
             this.Close(); // Đóng form hiện tại
         }
+
+        private void FormSanPham_Load(object sender, EventArgs e)
+        {
+            loadData();
+        }
     }
 }

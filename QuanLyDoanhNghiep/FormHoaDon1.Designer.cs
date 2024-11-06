@@ -208,6 +208,7 @@
             Controls.Add(dataGridView1);
             Name = "FormHoaDon1";
             Text = "FormHoaDon1";
+            Load += FormHoaDon1_Load_1;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();

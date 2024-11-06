@@ -231,6 +231,7 @@
             Controls.Add(lable1);
             Name = "FormKhachHang";
             Text = "FormKhachHang";
+            Load += FormKhachHang_Load_1;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();

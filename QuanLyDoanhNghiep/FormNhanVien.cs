@@ -245,5 +245,11 @@ namespace QuanLyDoanhNghiep
             txtDiaChi.Clear();
             txtDienthoai.Clear();
         }
+
+        private void FormNhanVien_Load(object sender, EventArgs e)
+        {
+            loadData();
+            loadComboBoxData();
+        }
     }
 }

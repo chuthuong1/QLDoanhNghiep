@@ -119,7 +119,6 @@
             txtId.Name = "txtId";
             txtId.Size = new Size(175, 35);
             txtId.TabIndex = 7;
-            
             // 
             // txtTenSanPham
             // 
@@ -212,6 +211,7 @@
             Controls.Add(btnThem);
             Name = "FormSanPham";
             Text = "FormSanPham";
+            Load += FormSanPham_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
