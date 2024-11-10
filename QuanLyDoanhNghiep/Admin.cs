@@ -42,5 +42,11 @@ namespace QuanLyDoanhNghiep
             FormHoaDon1 fhd = new FormHoaDon1();
             fhd.Show();
         }
+
+        private void btnPhieuNhap_Click(object sender, EventArgs e)
+        {
+            FormPhieuNhap fpn = new FormPhieuNhap();
+            fpn.Show();
+        }
     }
 }

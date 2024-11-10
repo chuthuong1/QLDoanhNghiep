@@ -32,6 +32,7 @@
             button2 = new Button();
             button3 = new Button();
             button4 = new Button();
+            btnPhieuNhap = new Button();
             SuspendLayout();
             // 
             // button1
@@ -74,11 +75,22 @@
             button4.UseVisualStyleBackColor = true;
             button4.Click += button4_Click;
             // 
+            // btnPhieuNhap
+            // 
+            btnPhieuNhap.Location = new Point(65, 305);
+            btnPhieuNhap.Name = "btnPhieuNhap";
+            btnPhieuNhap.Size = new Size(131, 40);
+            btnPhieuNhap.TabIndex = 4;
+            btnPhieuNhap.Text = "Nhập Hàng";
+            btnPhieuNhap.UseVisualStyleBackColor = true;
+            btnPhieuNhap.Click += btnPhieuNhap_Click;
+            // 
             // Admin
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1023, 630);
+            Controls.Add(btnPhieuNhap);
             Controls.Add(button4);
             Controls.Add(button3);
             Controls.Add(button2);
@@ -94,5 +106,6 @@
         private Button button2;
         private Button button3;
         private Button button4;
+        private Button btnPhieuNhap;
     }
 }
