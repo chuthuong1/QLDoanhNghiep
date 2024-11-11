@@ -34,11 +34,34 @@ namespace QuanLyDoanhNghiep
                 db.PhieuNhaps.Add(phieuNhap);
                 db.SaveChanges();
 
+                // Kiểm tra xem sản phẩm đã tồn tại trong bảng SanPham chưa
+                var sanPham = db.SanPhams.FirstOrDefault(sp => sp.TenSanPham == cbSanPham.Text);
+
+                // Nếu sản phẩm chưa có, thêm mới sản phẩm
+                if (sanPham == null)
+                {
+                    sanPham = new SanPham
+                    {
+                        TenSanPham = cbSanPham.Text,
+                        Gia = decimal.Parse(txtDonGia.Text), // Giả sử giá nhập vào là giá sản phẩm
+                        SoLuongTonKho = int.Parse(txtSoLuong.Text) // Số lượng nhập vào là số lượng tồn kho
+                    };
+
+                    db.SanPhams.Add(sanPham);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    // Nếu sản phẩm đã có, cập nhật lại số lượng tồn kho
+                    sanPham.SoLuongTonKho += int.Parse(txtSoLuong.Text);
+                    db.SaveChanges();
+                }
+
                 // Tạo chi tiết phiếu nhập
                 var chiTiet = new ChiTietPhieuNhap
                 {
                     IdphieuNhap = phieuNhap.IdphieuNhap,
-                    IdsanPham = db.SanPhams.FirstOrDefault(sp => sp.TenSanPham == cbSanPham.Text).IdsanPham,
+                    IdsanPham = sanPham.IdsanPham, // Sử dụng Id của sản phẩm vừa tìm thấy hoặc vừa tạo mới
                     SoLuong = int.Parse(txtSoLuong.Text),
                     DonGia = decimal.Parse(txtDonGia.Text),
                     ThanhTien = int.Parse(txtSoLuong.Text) * decimal.Parse(txtDonGia.Text)
@@ -74,8 +97,8 @@ namespace QuanLyDoanhNghiep
             var nhanVienList = db.NhanViens.Select(nv => nv.TenNhanVien).ToList();
             cbNhanVien.DataSource = nhanVienList;
             // sản phẩm
-            var sanPhamList = db.SanPhams.Select(sp =>  sp.TenSanPham).ToList();
-            cbSanPham.DataSource = sanPhamList; 
+            var sanPhamList = db.SanPhams.Select(sp => sp.TenSanPham).ToList();
+            cbSanPham.DataSource = sanPhamList;
         }
         private void loadData()
         {
@@ -85,9 +108,10 @@ namespace QuanLyDoanhNghiep
                             join c in db.ChiTietPhieuNhaps on p.IdphieuNhap equals c.IdphieuNhap
                             join ncc in db.NhaCungCaps on p.IdnhaCungCap equals ncc.IdnhaCungCap
                             join nv in db.NhanViens on p.IdnhanVien equals nv.IdnhanVien
-                            
+                            join sp in db.SanPhams on c.IdsanPham equals sp.IdsanPham
                             select new
                             {
+                                sp.TenSanPham,
                                 p.NgayNhap,
                                 p.IdphieuNhap,
                                 nv.TenNhanVien,
@@ -103,6 +127,36 @@ namespace QuanLyDoanhNghiep
             catch (Exception ex)
             {
                 MessageBox.Show($"Có lỗi khi hiển thị: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                // Kiểm tra nếu người dùng đã click vào một dòng hợp lệ
+                if (e.RowIndex >= 0)
+                {
+                    // Lấy các giá trị từ các ô trong dòng đã chọn
+                    var row = dataGridView1.Rows[e.RowIndex];
+
+                    // Gán giá trị vào các TextBox và ComboBox
+                    cbNhaCungCap.SelectedItem = row.Cells["NhaCungCapTen"].Value.ToString();
+                    cbNhanVien.SelectedItem = row.Cells["TenNhanVien"].Value.ToString();
+                    cbSanPham.SelectedItem = row.Cells["TenSanPham"].Value.ToString();
+                    txtSoLuong.Text = row.Cells["SoLuong"].Value.ToString();
+                    txtDonGia.Text = row.Cells["DonGia"].Value.ToString();
+                    txtTongTien.Text = row.Cells["TongTien"].Value.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Có lỗi khi chọn dữ liệu: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

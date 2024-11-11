@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using QuanLyDoanhNghiep.internalinterface;
 using QuanLyDoanhNghiep.Models;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,10 @@ using System.Windows.Forms;
 
 namespace QuanLyDoanhNghiep
 {
-    public partial class FormNhanVien : Form
+    public partial class FormNhanVien : Form, InterfaceData
     {
         QLDoanhNghiepContext db = new QLDoanhNghiepContext();
+
         public FormNhanVien()
         {
             InitializeComponent();
@@ -23,32 +25,9 @@ namespace QuanLyDoanhNghiep
         private void NhanVien_Load(object sender, EventArgs e)
         {
             MessageBox.Show("Load form thành công!");
-            loadData();
+            ((InterfaceData)this).loadData();
             loadComboBoxData();
         }
-
-        private void loadData()
-        {
-            try
-            {
-                var data = (from p in db.NhanViens
-                            select new
-                            {
-                                p.IdnhanVien,
-                                p.TenNhanVien,
-                                p.ChucVu,
-                                p.PhongBan,
-                                p.DiaChi,
-                                p.DienThoai
-                            }).ToList();
-                dataGridView1.DataSource = data;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Có lỗi khi hiển thị nhan vien: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private void btnThem_Click(object sender, EventArgs e)
         {
             try
@@ -81,7 +60,7 @@ namespace QuanLyDoanhNghiep
                 db.NhanViens.Add(nhanVien);
                 db.SaveChanges();
                 MessageBox.Show("Thêm nhân viên thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                loadData();
+                ((InterfaceData)this).loadData();
 
                 // Xóa các trường nhập liệu
                 txtTen.Clear();
@@ -129,9 +108,9 @@ namespace QuanLyDoanhNghiep
                     MessageBox.Show("Sửa nhân viên thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     // Xóa data textbox
-                    clearTextBox();
+                    ((InterfaceData)this).ClearTextBoxes();
                     // Tải lại dữ liệu để hiển thị
-                    loadData();
+                    ((InterfaceData)this).loadData();
 
                 }
                 else
@@ -170,10 +149,10 @@ namespace QuanLyDoanhNghiep
                     db.NhanViens.Remove(nhanVien);
                     db.SaveChanges();
                     MessageBox.Show("Xóa nhân viên thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    loadData(); // Tải lại dữ liệu sau khi xóa
+                    ((InterfaceData)this).loadData(); // Tải lại dữ liệu sau khi xóa
 
                     // Xóa các trường nhập liệu sau khi xóa
-                    clearTextBox();
+                    ((InterfaceData)this).ClearTextBoxes();
                 }
                 else
                 {
@@ -193,7 +172,7 @@ namespace QuanLyDoanhNghiep
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            loadData();
+            ((InterfaceData)this).loadData();
             loadComboBoxData();
         }
 
@@ -235,7 +214,37 @@ namespace QuanLyDoanhNghiep
             var phongBanList = db.NhanViens.Select(pb => pb.PhongBan).ToList();
             cbPhongBan.DataSource = phongBanList;
         }
-        private void clearTextBox()
+
+
+        private void FormNhanVien_Load(object sender, EventArgs e)
+        {
+            ((InterfaceData)this).loadData();
+            loadComboBoxData();
+        }
+
+        void InterfaceData.loadData()
+        {
+            try
+            {
+                var data = (from p in db.NhanViens
+                            select new
+                            {
+                                p.IdnhanVien,
+                                p.TenNhanVien,
+                                p.ChucVu,
+                                p.PhongBan,
+                                p.DiaChi,
+                                p.DienThoai
+                            }).ToList();
+                dataGridView1.DataSource = data;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Có lỗi khi hiển thị nhan vien: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void ClearTextBoxes()
         {
             // Xóa các trường nhập liệu sau khi thêm
             txtId.Clear();
@@ -244,12 +253,6 @@ namespace QuanLyDoanhNghiep
             cbPhongBan.SelectedIndex = -1; // Đặt lại ComboBox
             txtDiaChi.Clear();
             txtDienthoai.Clear();
-        }
-
-        private void FormNhanVien_Load(object sender, EventArgs e)
-        {
-            loadData();
-            loadComboBoxData();
         }
     }
 }

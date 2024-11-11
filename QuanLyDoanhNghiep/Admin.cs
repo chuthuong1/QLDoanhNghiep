@@ -48,5 +48,11 @@ namespace QuanLyDoanhNghiep
             FormPhieuNhap fpn = new FormPhieuNhap();
             fpn.Show();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            FormNhaCungCap ncc = new FormNhaCungCap();
+            ncc.Show();
+        }
     }
 }

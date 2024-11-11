@@ -33,6 +33,7 @@
             button3 = new Button();
             button4 = new Button();
             btnPhieuNhap = new Button();
+            button5 = new Button();
             SuspendLayout();
             // 
             // button1
@@ -85,11 +86,22 @@
             btnPhieuNhap.UseVisualStyleBackColor = true;
             btnPhieuNhap.Click += btnPhieuNhap_Click;
             // 
+            // button5
+            // 
+            button5.Location = new Point(69, 378);
+            button5.Name = "button5";
+            button5.Size = new Size(254, 40);
+            button5.TabIndex = 5;
+            button5.Text = "Quản Lý nhà cung cấp";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
+            // 
             // Admin
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1023, 630);
+            Controls.Add(button5);
             Controls.Add(btnPhieuNhap);
             Controls.Add(button4);
             Controls.Add(button3);
@@ -107,5 +119,6 @@
         private Button button3;
         private Button button4;
         private Button btnPhieuNhap;
+        private Button button5;
     }
 }

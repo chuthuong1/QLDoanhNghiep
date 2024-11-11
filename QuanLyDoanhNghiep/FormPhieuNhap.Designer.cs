@@ -47,6 +47,7 @@
             label8 = new Label();
             btnLamMoi = new Button();
             btnXoa = new Button();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -111,6 +112,7 @@
             dataGridView1.RowTemplate.Height = 37;
             dataGridView1.Size = new Size(1266, 606);
             dataGridView1.TabIndex = 6;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // cbNhanVien
             // 
@@ -212,11 +214,22 @@
             btnXoa.Text = "Xóa";
             btnXoa.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            button1.Location = new Point(1604, 101);
+            button1.Name = "button1";
+            button1.Size = new Size(131, 40);
+            button1.TabIndex = 19;
+            button1.Text = "Thoát";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // FormPhieuNhap
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1899, 1175);
+            Controls.Add(button1);
             Controls.Add(btnXoa);
             Controls.Add(btnLamMoi);
             Controls.Add(label8);
@@ -265,5 +278,6 @@
         private Label label8;
         private Button btnLamMoi;
         private Button btnXoa;
+        private Button button1;
     }
 }

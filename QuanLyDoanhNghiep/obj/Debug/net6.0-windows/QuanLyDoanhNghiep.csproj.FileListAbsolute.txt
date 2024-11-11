@@ -60,3 +60,4 @@ C:\Users\Thuong\source\repos\QuanLyDoanhNghiep\QuanLyDoanhNghiep\obj\Debug\net6.
 C:\Users\Thuong\source\repos\QuanLyDoanhNghiep\QuanLyDoanhNghiep\obj\Debug\net6.0-windows\QuanLyDoanhNghiep.FormHoaDon1.resources
 C:\Users\Thuong\source\repos\QuanLyDoanhNghiep\QuanLyDoanhNghiep\obj\Debug\net6.0-windows\QuanLyDoanhNghiep.Order.resources
 C:\Users\Thuong\source\repos\QuanLyDoanhNghiep\QuanLyDoanhNghiep\obj\Debug\net6.0-windows\QuanLyDoanhNghiep.FormPhieuNhap.resources
+C:\Users\Thuong\source\repos\QuanLyDoanhNghiep\QuanLyDoanhNghiep\obj\Debug\net6.0-windows\QuanLyDoanhNghiep.FormNhaCungCap.resources
