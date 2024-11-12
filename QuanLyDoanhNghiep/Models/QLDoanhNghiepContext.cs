@@ -33,7 +33,7 @@ namespace QuanLyDoanhNghiep.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-B10O0BS\\THUONG;Database=QLDoanhNghiep;User Id=sa;Password=123;TrustServerCertificate=True;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-B10O0BS\\THUONG;Database=QLDoanhNghiep;User Id=sa;Password=123;");
             }
         }
 
@@ -222,6 +222,11 @@ namespace QuanLyDoanhNghiep.Models
                 entity.Property(e => e.NgayChi).HasColumnType("date");
 
                 entity.Property(e => e.SoTien).HasColumnType("decimal(18, 2)");
+
+                entity.HasOne(d => d.IdnhanVienNavigation)
+                    .WithMany(p => p.PhieuChis)
+                    .HasForeignKey(d => d.IdnhanVien)
+                    .HasConstraintName("FK_PhieuChi_NhanVien");
 
                 entity.HasOne(d => d.IdphieuNhapNavigation)
                     .WithMany(p => p.PhieuChis)

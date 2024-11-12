@@ -8,6 +8,7 @@ namespace QuanLyDoanhNghiep.Models
         public NhanVien()
         {
             HoaDonBans = new HashSet<HoaDonBan>();
+            PhieuChis = new HashSet<PhieuChi>();
             PhieuNhaps = new HashSet<PhieuNhap>();
         }
 
@@ -19,6 +20,7 @@ namespace QuanLyDoanhNghiep.Models
         public string? DienThoai { get; set; }
 
         public virtual ICollection<HoaDonBan> HoaDonBans { get; set; }
+        public virtual ICollection<PhieuChi> PhieuChis { get; set; }
         public virtual ICollection<PhieuNhap> PhieuNhaps { get; set; }
     }
 }

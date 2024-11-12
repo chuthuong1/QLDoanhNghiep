@@ -34,6 +34,7 @@
             button4 = new Button();
             btnPhieuNhap = new Button();
             button5 = new Button();
+            btnPhieuChi = new Button();
             SuspendLayout();
             // 
             // button1
@@ -96,11 +97,22 @@
             button5.UseVisualStyleBackColor = true;
             button5.Click += button5_Click;
             // 
+            // btnPhieuChi
+            // 
+            btnPhieuChi.Location = new Point(81, 455);
+            btnPhieuChi.Name = "btnPhieuChi";
+            btnPhieuChi.Size = new Size(131, 40);
+            btnPhieuChi.TabIndex = 6;
+            btnPhieuChi.Text = "Phiếu Chi";
+            btnPhieuChi.UseVisualStyleBackColor = true;
+            btnPhieuChi.Click += btnPhieuChi_Click;
+            // 
             // Admin
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1023, 630);
+            Controls.Add(btnPhieuChi);
             Controls.Add(button5);
             Controls.Add(btnPhieuNhap);
             Controls.Add(button4);
@@ -120,5 +132,6 @@
         private Button button4;
         private Button btnPhieuNhap;
         private Button button5;
+        private Button btnPhieuChi;
     }
 }

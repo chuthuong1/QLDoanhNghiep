@@ -10,7 +10,9 @@ namespace QuanLyDoanhNghiep.Models
         public DateTime? NgayChi { get; set; }
         public decimal? SoTien { get; set; }
         public string? LoaiThanhToan { get; set; }
+        public int? IdnhanVien { get; set; }
 
+        public virtual NhanVien? IdnhanVienNavigation { get; set; }
         public virtual PhieuNhap? IdphieuNhapNavigation { get; set; }
     }
 }
