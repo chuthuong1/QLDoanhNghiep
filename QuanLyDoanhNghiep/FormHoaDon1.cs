@@ -25,6 +25,7 @@ namespace QuanLyDoanhNghiep
             try
             {
                 var data = (from hd in db.HoaDonBans
+                            join cthd in db.ChiTietHoaDonBans on hd.IdhoaDon equals cthd.IdhoaDon
                             select new
                             {
                                 hd.IdhoaDon,
@@ -32,9 +33,14 @@ namespace QuanLyDoanhNghiep
                                 TenNhanVien = hd.IdnhanVienNavigation.TenNhanVien,
                                 hd.NgayBan,
                                 hd.TongTien,
-                                hd.LoaiThanhToan
+                                hd.LoaiThanhToan,
+                                IdSanPham = cthd.IdsanPham,
+                                SoLuong = cthd.SoLuong,
+                                DonGia = cthd.DonGia,
+                                ThanhTien = cthd.ThanhTien
                             }).ToList();
 
+                // Bind the data to DataGridView
                 dataGridView1.DataSource = data;
             }
             catch (Exception ex)

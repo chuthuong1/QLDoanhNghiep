@@ -223,5 +223,28 @@ namespace QuanLyDoanhNghiep
         {
             loadData();
         }
+
+        private void btnOrder_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCreateOrder_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                var selectedRow = dataGridView1.SelectedRows[0];
+                string tenSanPham = selectedRow.Cells["TenSanPham"].Value.ToString();
+                int soLuongConLai = int.Parse(selectedRow.Cells["SoLuongTonKho"].Value.ToString());
+                decimal donGia = decimal.Parse(selectedRow.Cells["Gia"].Value.ToString());
+                int idSanPham = int.Parse(selectedRow.Cells["IdSanPham"].Value.ToString());
+                FormOrder formOrder = new FormOrder(tenSanPham, soLuongConLai, donGia, idSanPham);
+                formOrder.Show();
+            }
+            else
+            {
+                MessageBox.Show("Please select a product to order.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
     }
 }

@@ -83,11 +83,13 @@ namespace QuanLyDoanhNghiep
             }
         }
 
+        // auto load when open form
         private void FormPhieuNhap_Load(object sender, EventArgs e)
         {
             loadData();
-            loadComboBoxData();
+            LoadComboBoxData();
             AddPrintButtonColumn();
+            AddXuatHoaDonColumn();
         }
 
         // in phiếu
@@ -95,13 +97,21 @@ namespace QuanLyDoanhNghiep
         {
             DataGridViewButtonColumn printButtonColumn = new DataGridViewButtonColumn();
             printButtonColumn.Name = "PrintColumn";
-            printButtonColumn.HeaderText = "Print";
+            printButtonColumn.HeaderText = "In hóa đơn";
             printButtonColumn.Text = "In";
             printButtonColumn.UseColumnTextForButtonValue = true;
             dataGridView1.Columns.Add(printButtonColumn);
         }
-
-        private void loadComboBoxData()
+        private void AddXuatHoaDonColumn()
+        {
+            DataGridViewButtonColumn xuatHoaDonColumn = new DataGridViewButtonColumn();
+            xuatHoaDonColumn.Name = "XuatHoaDonColumn";
+            xuatHoaDonColumn.HeaderText = "Chi";
+            xuatHoaDonColumn.Text = "Chi";
+            xuatHoaDonColumn.UseColumnTextForButtonValue = true;
+            dataGridView1.Columns.Add(xuatHoaDonColumn);
+        }
+        private void LoadComboBoxData()
         {
             // Lấy dữ liệu cho ComboBox Nha Cung Cấp
             var nhaCungCapList = db.NhaCungCaps.Select(cc => cc.TenNhaCungCap).ToList();
@@ -114,6 +124,8 @@ namespace QuanLyDoanhNghiep
             var sanPhamList = db.SanPhams.Select(sp => sp.TenSanPham).ToList();
             cbSanPham.DataSource = sanPhamList;
         }
+        
+        //load data for datagridview
         private void loadData()
         {
             try
@@ -144,6 +156,7 @@ namespace QuanLyDoanhNghiep
             }
         }
 
+        // close form
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -193,14 +206,14 @@ namespace QuanLyDoanhNghiep
             int rowHeight = 30; // Điều chỉnh chiều cao dòng để tránh đè chữ
             Brush brush = Brushes.Black;
 
-            // Fonts for different sections
+            // Fonts
             Font titleFont = new Font("Arial", 18, FontStyle.Bold);
             Font headerFont = new Font("Arial", 12, FontStyle.Bold);
             Font bodyFont = new Font("Arial", 10);
             Font redFont = new Font("Arial", 12, FontStyle.Bold);
             Brush redBrush = Brushes.Red;
-           
-            // Header with logo and title
+
+            // Tiêu đề
             e.Graphics.DrawString("Cửa hàng xxx - Thái Nguyên", bodyFont, brush, 200, yPosition);
             yPosition += 20;
             e.Graphics.DrawString("1444 Đường 3/2, Sông Công, TP.Thái Nguyên", bodyFont, brush, 200, yPosition);
@@ -226,12 +239,6 @@ namespace QuanLyDoanhNghiep
             DataGridViewRow selectedRow = dataGridView1.CurrentRow;
             if (selectedRow != null)
             {
-                // Other details such as Đơn vị and Số phiếu
-                // e.Graphics.DrawString("Nhà cung cấp: " + selectedRow.Cells["NhaCungCapTen"].Value.ToString(), headerFont, brush, e.MarginBounds.Left, yPosition);
-                // e.Graphics.DrawString("Id phiếu nhập: " + selectedRow.Cells["IDPhieuNhap"].Value.ToString(), headerFont, brush, e.MarginBounds.Left + 400, yPosition);
-                // yPosition += 20;
-                // In thông tin của dòng được chọn
-                // Print data in a row-by-row manner
                 e.Graphics.DrawString(selectedRow.Cells["IdphieuNhap"].Value.ToString(), bodyFont, brush, e.MarginBounds.Left, yPosition);
                 e.Graphics.DrawString(selectedRow.Cells["TenNhanVien"].Value.ToString(), bodyFont, brush, e.MarginBounds.Left + 100, yPosition);
                 e.Graphics.DrawString(Convert.ToDateTime(selectedRow.Cells["NgayNhap"].Value).ToString("dd/MM/yyyy"), bodyFont, brush, e.MarginBounds.Left + 250, yPosition);
@@ -265,6 +272,7 @@ namespace QuanLyDoanhNghiep
 
             // Convert grand total to words and display it
             string amountInWords = ConvertAmountToWords(grandTotal);
+
             // Total amount in words and signature fields
             e.Graphics.DrawString("Tổng tiền hàng viết bằng chữ: ", bodyFont, brush, e.MarginBounds.Left, yPosition);
             e.Graphics.DrawString(amountInWords, redFont, redBrush, e.MarginBounds.Left + 210, yPosition);  // Điều chỉnh vị trí sao cho đẹp mắt
@@ -354,7 +362,15 @@ namespace QuanLyDoanhNghiep
             return result.Trim();
         }
 
-
-
+        //clear các thông tin ở texbox và các combobox
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            txtDonGia.Clear();
+            txtSoLuong.Clear();
+            txtTongTien.Clear();
+            cbNhaCungCap.SelectedIndex = -1;
+            cbNhanVien.SelectedIndex = -1;
+            cbSanPham.SelectedIndex = -1;
+        }
     }
 }

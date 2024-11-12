@@ -44,6 +44,8 @@
             btnXoa = new Button();
             btnThoat = new Button();
             btnLoad = new Button();
+            btnOrder = new Button();
+            btnCreateOrder = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -78,7 +80,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(55, 145);
+            label3.Location = new Point(55, 162);
             label3.Name = "label3";
             label3.Size = new Size(51, 30);
             label3.TabIndex = 3;
@@ -129,7 +131,7 @@
             // 
             // txtLoaiSanPham
             // 
-            txtLoaiSanPham.Location = new Point(158, 172);
+            txtLoaiSanPham.Location = new Point(186, 157);
             txtLoaiSanPham.Name = "txtLoaiSanPham";
             txtLoaiSanPham.Size = new Size(175, 35);
             txtLoaiSanPham.TabIndex = 9;
@@ -188,11 +190,33 @@
             btnLoad.UseVisualStyleBackColor = true;
             btnLoad.Click += btnLoad_Click;
             // 
+            // btnOrder
+            // 
+            btnOrder.Location = new Point(781, 131);
+            btnOrder.Name = "btnOrder";
+            btnOrder.Size = new Size(131, 40);
+            btnOrder.TabIndex = 16;
+            btnOrder.Text = "Xuất sản phẩm";
+            btnOrder.UseVisualStyleBackColor = true;
+            btnOrder.Click += btnOrder_Click;
+            // 
+            // btnCreateOrder
+            // 
+            btnCreateOrder.Location = new Point(781, 209);
+            btnCreateOrder.Name = "btnCreateOrder";
+            btnCreateOrder.Size = new Size(131, 40);
+            btnCreateOrder.TabIndex = 17;
+            btnCreateOrder.Text = "Xuất hàng";
+            btnCreateOrder.UseVisualStyleBackColor = true;
+            btnCreateOrder.Click += btnCreateOrder_Click;
+            // 
             // FormSanPham
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1081, 755);
+            Controls.Add(btnCreateOrder);
+            Controls.Add(btnOrder);
             Controls.Add(btnLoad);
             Controls.Add(btnThoat);
             Controls.Add(btnXoa);
@@ -235,5 +259,7 @@
         private Button btnXoa;
         private Button btnThoat;
         private Button btnLoad;
+        private Button btnOrder;
+        private Button btnCreateOrder;
     }
 }

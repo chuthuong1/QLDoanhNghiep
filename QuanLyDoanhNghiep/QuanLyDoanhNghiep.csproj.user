@@ -13,6 +13,9 @@
     <Compile Update="FormNhaCungCap.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FormOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="FormPhieuChi.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -23,9 +26,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="FormNhanVien.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Order.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

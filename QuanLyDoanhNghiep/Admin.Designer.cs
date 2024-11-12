@@ -111,7 +111,7 @@
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1023, 630);
+            ClientSize = new Size(569, 586);
             Controls.Add(btnPhieuChi);
             Controls.Add(button5);
             Controls.Add(btnPhieuNhap);
